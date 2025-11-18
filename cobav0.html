@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Destination - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #52D273;
+            --dark-navy: #2C3E50;
+            --light-gray: #F5F5F5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 2rem;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--dark-navy) !important;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--dark-navy) !important;
+            margin: 0 0.5rem;
+            font-weight: 500;
+        }
+
+        .btn-outline-custom {
+            border: 2px solid var(--dark-navy);
+            color: var(--dark-navy);
+            border-radius: 0.25rem;
+        }
+
+        .btn-outline-custom:hover {
+            background-color: var(--dark-navy);
+            color: white;
+        }
+
+        .btn-custom {
+            background-color: var(--dark-navy);
+            color: white;
+            border-radius: 0.25rem;
+            border: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Home%20Page-fWDnzjCTGjpbQuT0sr2YLhJnyrEqze.png');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            overflow: hidden;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 30px,
+                rgba(255,255,255,0.1) 30px,
+                rgba(255,255,255,0.1) 60px
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            margin-left: 3rem;
+        }
+
+        .hero-text {
+            background-color: rgba(0,0,0,0.6);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-radius: 0.25rem;
+        }
+
+        /* Cards Section */
+        .cards-section {
+            background-color: var(--primary-green);
+            padding: 4rem 2rem;
+        }
+
+        .destination-card {
+            background: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            border: 2px solid var(--dark-navy);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-image {
+            height: 200px;
+            background-color: var(--light-gray);
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-placeholder {
+            background-color: var(--dark-navy);
+            height: 12px;
+            margin-bottom: 1rem;
+            border-radius: 2px;
+        }
+
+        .card-text-placeholder {
+            background-color: #9CA3AF;
+            height: 8px;
+            margin-bottom: 0.75rem;
+            border-radius: 2px;
+        }
+
+        /* Testimonial Section */
+        .testimonial-section {
+            background-color: var(--primary-green);
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .quote-mark {
+            font-size: 4rem;
+            color: #4CACFA;
+            font-weight: bold;
+        }
+
+        .testimonial-text {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--dark-navy);
+            margin: 1rem 0;
+        }
+
+        /* Destinations Section */
+        .destinations-featured {
+            background-color: var(--primary-green);
+            padding: 4rem 2rem;
+        }
+
+        .destinations-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--dark-navy);
+            margin-bottom: 3rem;
+        }
+
+        .destination-item {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 1.5rem;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .destination-item:nth-child(even) {
+            grid-template-columns: 1fr 2fr 1fr;
+            direction: rtl;
+        }
+
+        .destination-logo {
+            background-color: var(--dark-navy);
+            height: 100px;
+            border-radius: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .destination-info {
+            direction: ltr;
+        }
+
+        .info-placeholder {
+            background-color: #D1D5DB;
+            height: 10px;
+            margin-bottom: 0.75rem;
+            border-radius: 2px;
+        }
+
+        .info-placeholder:last-child {
+            margin-bottom: 0;
+        }
+
+        .btn-baca {
+            background-color: #E0F2FE;
+            color: var(--dark-navy);
+            border: 1px solid var(--dark-navy);
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 0.75rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .destination-item,
+            .destination-item:nth-child(even) {
+                grid-template-columns: 1fr;
+                direction: ltr;
+            }
+
+            .destination-item:nth-child(even) {
+                direction: ltr;
+            }
+
+            .hero {
+                height: 300px;
+            }
+
+            .hero-content {
+                margin-left: 1rem;
+            }
+
+            .testimonial-text {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">🏔️</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">📍 Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">🔍 Explore</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">🗺️ Destination</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">⛺ Adventure</a></li>
+                </ul>
+                <div class="ms-3">
+                    <button class="btn btn-outline-custom me-2">Button</button>
+                    <button class="btn btn-custom">Button</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-text">Selengkapnya</div>
+        </div>
+    </section>
+
+    <!-- Destination Cards -->
+    <section class="cards-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-3">
+                    <div class="destination-card">
+                        <div class="card-image">
+                            <img src="/placeholder.svg?height=200&width=250" alt="Mountain Valley">
+                        </div>
+                        <div class="card-body">
+                            <div class="card-placeholder"></div>
+                            <div class="card-text-placeholder"></div>
+                            <div class="card-text-placeholder" style="width: 80%;"></div>
+                            <div class="card-text-placeholder" style="width: 60%;"></div>
+                            <button class="btn btn-custom mt-3">Button</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="destination-card">
+                        <div class="card-image">
+                            <img src="/placeholder.svg?height=200&width=250" alt="Beach">
+                        </div>
+                        <div class="card-body">
+                            <div class="card-placeholder"></div>
+                            <div class="card-text-placeholder"></div>
+                            <div class="card-text-placeholder" style="width: 80%;"></div>
+                            <div class="card-text-placeholder" style="width: 60%;"></div>
+                            <button class="btn btn-custom mt-3">Button</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="destination-card">
+                        <div class="card-image">
+                            <img src="/placeholder.svg?height=200&width=250" alt="Rock Island">
+                        </div>
+                        <div class="card-body">
+                            <div class="card-placeholder"></div>
+                            <div class="card-text-placeholder"></div>
+                            <div class="card-text-placeholder" style="width: 80%;"></div>
+                            <div class="card-text-placeholder" style="width: 60%;"></div>
+                            <button class="btn btn-custom mt-3">Button</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="destination-card">
+                        <div class="card-image">
+                            <img src="/placeholder.svg?height=200&width=250" alt="Temple Valley">
+                        </div>
+                        <div class="card-body">
+                            <div class="card-placeholder"></div>
+                            <div class="card-text-placeholder"></div>
+                            <div class="card-text-placeholder" style="width: 80%;"></div>
+                            <div class="card-text-placeholder" style="width: 60%;"></div>
+                            <button class="btn btn-custom mt-3">Button</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="testimonial-section">
+        <div class="container">
+            <div class="quote-mark">"</div>
+            <p class="testimonial-text">bla -bla</p>
+            <div class="quote-mark" style="text-align: right;">"</div>
+        </div>
+    </section>
+
+    <!-- Featured Destinations -->
+    <section class="destinations-featured">
+        <div class="container">
+            <h2 class="destinations-title">Berbagai Destinasi yang Menantang</h2>
+            
+            <div class="destination-item">
+                <div class="destination-logo">Logo</div>
+                <div class="destination-info">
+                    <div class="info-placeholder"></div>
+                    <div class="info-placeholder" style="width: 85%;"></div>
+                    <button class="btn btn-baca">Baca Sekarang</button>
+                </div>
+            </div>
+
+            <div class="destination-item">
+                <div class="destination-logo">Logo</div>
+                <div class="destination-info">
+                    <div class="info-placeholder"></div>
+                    <div class="info-placeholder" style="width: 85%;"></div>
+                    <button class="btn btn-baca">Baca Sekarang</button>
+                </div>
+            </div>
+
+            <div class="destination-item">
+                <div class="destination-logo">Logo</div>
+                <div class="destination-info">
+                    <div class="info-placeholder"></div>
+                    <div class="info-placeholder" style="width: 85%;"></div>
+                    <button class="btn btn-baca">Baca Sekarang</button>
+                </div>
+            </div>
+
+            <div class="destination-item">
+                <div class="destination-logo">Logo</div>
+                <div class="destination-info">
+                    <div class="info-placeholder"></div>
+                    <div class="info-placeholder" style="width: 85%;"></div>
+                    <button class="btn btn-baca">Baca Sekarang</button>
+                </div>
+            </div>
+
+            <div class="destination-item">
+                <div class="destination-logo">Logo</div>
+                <div class="destination-info">
+                    <div class="info-placeholder"></div>
+                    <div class="info-placeholder" style="width: 85%;"></div>
+                    <button class="btn btn-baca">Baca Sekarang</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
