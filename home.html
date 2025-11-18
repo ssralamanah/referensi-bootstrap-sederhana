@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toko Elektronik - One Stop Shopping</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #5B9FDB;
+            --primary-red: #E84C3D;
+            --primary-green: #2ECC71;
+            --primary-yellow: #F4D03F;
+            --dark: #1F1F1F;
+            --light: #F8F9FA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark) !important;
+        }
+
+        .nav-link {
+            color: var(--dark) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-blue) !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #5B9FDB 0%, #7CB3E3 100%);
+            color: white;
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn-primary-custom {
+            background-color: var(--dark);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: var(--primary-blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Category Cards */
+        .category-cards {
+            padding: 3rem 0;
+        }
+
+        .card-category {
+            border: none;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            color: white;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .card-category:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-category.blue {
+            background-color: var(--primary-blue);
+        }
+
+        .card-category.yellow {
+            background: linear-gradient(135deg, #F4D03F 0%, #F8B88B 100%);
+            color: var(--dark);
+        }
+
+        .card-category.red {
+            background: linear-gradient(135deg, #E84C3D 0%, #F05D4D 100%);
+        }
+
+        .card-category.green {
+            background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);
+        }
+
+        .card-category h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .card-category .btn-card {
+            background-color: rgba(255,255,255,0.3);
+            border: none;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            width: fit-content;
+            transition: all 0.3s;
+        }
+
+        .card-category .btn-card:hover {
+            background-color: rgba(255,255,255,0.6);
+        }
+
+        .card-category.yellow .btn-card {
+            color: var(--dark);
+        }
+
+        /* Product Section */
+        .products-section {
+            padding: 3rem 0;
+            background-color: var(--light);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #999;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .product-body {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .product-category {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        /* Promotional Banner */
+        .promo-banner {
+            background: linear-gradient(135deg, #E84C3D 0%, #F05D4D 100%);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 1.5rem;
+            margin: 3rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .promo-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .promo-content p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        /* News Section */
+        .news-section {
+            padding: 3rem 0;
+        }
+
+        .news-card {
+            border: none;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #5B9FDB, #2ECC71);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .news-body {
+            padding: 1.5rem;
+        }
+
+        .news-date {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .news-description {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-section h5 {
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            color: #999;
+        }
+
+        /* Features */
+        .features-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+        }
+
+        .feature-item h5 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .feature-item p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero {
+                padding: 3rem 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .promo-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .card-category {
+                min-height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-shop"></i> Toko Elektronik
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#products">Produk</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#news">Berita</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Kontak</a></li>
+                </ul>
+                <button class="btn btn-outline-dark ms-3" style="border-radius: 25px; padding: 0.5rem 1.5rem;">
+                    <i class="fas fa-shopping-cart"></i> Keranjang
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <p style="margin-bottom: 0.5rem; opacity: 0.8;">Toko Elektronik</p>
+                    <h1>One Stop<br>Shopping</h1>
+                    <h2 style="font-size: 2rem; margin-bottom: 2rem;">HEADPHONE</h2>
+                    <p>Temukan koleksi headphone premium dengan teknologi terkini dan kualitas terbaik untuk pengalaman audio yang luar biasa.</p>
+                    <button class="btn-primary-custom">
+                        <i class="fas fa-arrow-right"></i> Jelajahi Sekarang
+                    </button>
+                </div>
+                <div class="col-lg-6 hero-image">
+                    <div style="font-size: 150px; color: rgba(255,255,255,0.2);">
+                        🎧
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Cards -->
+    <section class="category-cards">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card-category blue">
+                        <div>
+                            <h3>🎮</h3>
+                            <h5>Gaming</h5>
+                        </div>
+                        <button class="btn-card">Lihat Lebih</button>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card-category yellow">
+                        <div>
+                            <h3>📻</h3>
+                            <h5>Wireless</h5>
+                        </div>
+                        <button class="btn-card">Lihat Lebih</button>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card-category red">
+                        <div>
+                            <h3>💻</h3>
+                            <h5>Devices</h5>
+                        </div>
+                        <button class="btn-card">Lihat Lebih</button>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card-category green">
+                        <div>
+                            <h3>📱</h3>
+                            <h5>Mobile</h5>
+                        </div>
+                        <button class="btn-card">Lihat Lebih</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <h2 class="section-title">Produk Terlaris</h2>
+            <p class="section-subtitle">Koleksi terbaik dari brand ternama dengan harga kompetitif</p>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="product-card">
+                        <div class="product-image">🎧</div>
+                        <div class="product-body">
+                            <div class="product-name">Beats Studio Pro</div>
+                            <div class="product-category">Headphone Premium</div>
+                            <div class="product-price">Rp 3.999.000</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="product-card">
+                        <div class="product-image">🎵</div>
+                        <div class="product-body">
+                            <div class="product-name">Sony WH-1000XM5</div>
+                            <div class="product-category">Noise Canceling</div>
+                            <div class="product-price">Rp 4.499.000</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="product-card">
+                        <div class="product-image">🎮</div>
+                        <div class="product-body">
+                            <div class="product-name">Gaming Headset Pro</div>
+                            <div class="product-category">Gaming Edition</div>
+                            <div class="product-price">Rp 2.299.000</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="product-card">
+                        <div class="product-image">📻</div>
+                        <div class="product-body">
+                            <div class="product-name">JBL Live Pro 2</div>
+                            <div class="product-category">Wireless</div>
+                            <div class="product-price">Rp 2.799.000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="container">
+        <div class="features-section">
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-shipping-fast"></i>
+                </div>
+                <h5>Pengiriman Gratis</h5>
+                <p>Gratis ongkos kirim untuk pembelian di atas Rp 500.000</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h5>Garansi Resmi</h5>
+                <p>Semua produk dilengkapi garansi resmi dari manufaktur</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h5>Dukungan Pelanggan 24/7</h5>
+                <p>Tim support siap membantu Anda kapan saja</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h5>Pembayaran Aman</h5>
+                <p>Transaksi terenkripsi dengan teknologi terkini</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promo Banner -->
+    <section class="container">
+        <div class="promo-banner">
+            <div class="promo-content">
+                <h2>Dapatkan Diskon<br>Musim Panas</h2>
+                <p>Hemat hingga 50% untuk produk pilihan hingga akhir bulan!</p>
+                <button class="btn-primary-custom" style="background-color: white; color: var(--primary-red);" onclick="window.location.href='produk.html';">
+                    Belanja Sekarang
+                </button>
+            </div>
+            <div style="font-size: 100px; opacity: 0.3;">
+                🎧
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news-section" id="news">
+        <div class="container">
+            <h2 class="section-title">Berita Terbaru</h2>
+            <p class="section-subtitle">Update produk dan promo terkini dari Toko Elektronik</p>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="news-card">
+                        <div class="news-image">📰</div>
+                        <div class="news-body">
+                            <div class="news-date">18 November 2025</div>
+                            <div class="news-title">Peluncuran Headphone Terbaru 2025</div>
+                            <div class="news-description">Teknologi noise canceling generasi terbaru hadir dengan performa maksimal dan daya tahan baterai yang lama.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="news-card">
+                        <div class="news-image">🎁</div>
+                        <div class="news-body">
+                            <div class="news-date">15 November 2025</div>
+                            <div class="news-title">Program Trade-In Produk Lama</div>
+                            <div class="news-description">Tukarkan headphone lama Anda dengan yang baru dan dapatkan diskon spesial hingga 1 juta rupiah.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="news-card">
+                        <div class="news-image">⭐</div>
+                        <div class="news-body">
+                            <div class="news-date">10 November 2025</div>
+                            <div class="news-title">Review Produk dari Expert</div>
+                            <div class="news-description">Para ahli audio menilai koleksi headphone kami sebagai yang terbaik di kelasnya dengan performa premium.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-md-3 footer-section">
+                    <h5>Toko Elektronik</h5>
+                    <p style="color: #999; font-size: 0.9rem;">Toko online terpercaya untuk kebutuhan audio dan elektronik Anda.</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="#" style="margin-right: 1rem; color: var(--primary-blue);"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="margin-right: 1rem; color: var(--primary-blue);"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="margin-right: 1rem; color: var(--primary-blue);"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: var(--primary-blue);"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5>Menu</h5>
+                    <ul>
+                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#products">Produk</a></li>
+                        <li><a href="#news">Berita</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5>Bantuan</h5>
+                    <ul>
+                        <li><a href="#">Hubungi Kami</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5>Kontak</h5>
+                    <p style="color: #999; margin-bottom: 0.5rem;">
+                        <i class="fas fa-map-marker-alt"></i> Jl. Elektronik No. 123, Jakarta
+                    </p>
+                    <p style="color: #999; margin-bottom: 0.5rem;">
+                        <i class="fas fa-phone"></i> +62 812-3456-7890
+                    </p>
+                    <p style="color: #999;">
+                        <i class="fas fa-envelope"></i> info@tokoelektronik.com
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Toko Elektronik. Semua hak dilindungi. | Dibuat dengan <i class="fas fa-heart" style="color: var(--primary-red);"></i> oleh v0</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

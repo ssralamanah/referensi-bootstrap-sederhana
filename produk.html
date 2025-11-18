@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toko Elektronik - Produk</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #5B9FDB;
+            --primary-red: #E84C3D;
+            --primary-green: #2ECC71;
+            --primary-yellow: #F4D03F;
+            --dark: #1F1F1F;
+            --light: #F8F9FA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark) !important;
+        }
+
+        .nav-link {
+            color: var(--dark) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-blue) !important;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb-section {
+            background-color: var(--light);
+            padding: 2rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .breadcrumb-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-top: 1rem;
+        }
+
+        /* Filter and Products Section */
+        .products-page-section {
+            padding: 2rem 0;
+        }
+
+        .filter-section {
+            background-color: var(--light);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-title {
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .filter-group {
+            margin-bottom: 2rem;
+        }
+
+        .filter-group label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        .filter-group input[type="checkbox"] {
+            margin-right: 0.5rem;
+            cursor: pointer;
+        }
+
+        .price-range {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .price-range input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
+        }
+
+        /* Product Grid */
+        .product-card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: none;
+            height: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--primary-red);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .product-body {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .product-category {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-rating {
+            margin-bottom: 1rem;
+        }
+
+        .product-rating i {
+            color: var(--primary-yellow);
+            font-size: 0.9rem;
+        }
+
+        .product-rating-text {
+            color: #999;
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .btn-add-cart {
+            width: 100%;
+            background-color: var(--primary-blue);
+            border: none;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-add-cart:hover {
+            background-color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Pagination */
+        .pagination-section {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+            gap: 0.5rem;
+        }
+
+        .pagination-section a,
+        .pagination-section span {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
+            color: var(--dark);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .pagination-section a:hover {
+            background-color: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+
+        .pagination-section span.active {
+            background-color: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-section h5 {
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .breadcrumb-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .product-image {
+                height: 180px;
+                font-size: 2.5rem;
+            }
+
+            .filter-section {
+                margin-bottom: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-shop"></i> Toko Elektronik
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="shop.html">Produk</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#news">Berita</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Kontak</a></li>
+                </ul>
+                <button class="btn btn-outline-dark ms-3" style="border-radius: 25px; padding: 0.5rem 1.5rem;">
+                    <i class="fas fa-shopping-cart"></i> Keranjang
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb-section">
+        <div class="container">
+            <nav style="margin-bottom: 1rem;">
+                <ol class="breadcrumb" style="margin-bottom: 0;">
+                    <li class="breadcrumb-item"><a href="index.html" style="text-decoration: none; color: var(--primary-blue);">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Produk</li>
+                </ol>
+            </nav>
+            <h1>Koleksi Produk</h1>
+        </div>
+    </section>
+
+    <!-- Products Page Content -->
+    <section class="products-page-section">
+        <div class="container">
+            <div class="row">
+                <!-- Filter Sidebar -->
+                <div class="col-lg-3">
+                    <div class="filter-section">
+                        <h5 class="filter-title">Filter</h5>
+                        
+                        <!-- Category Filter -->
+                        <div class="filter-group">
+                            <label class="filter-title" style="margin-bottom: 1rem;">Kategori</label>
+                            <label><input type="checkbox"> Gaming</label>
+                            <label><input type="checkbox"> Wireless</label>
+                            <label><input type="checkbox"> Devices</label>
+                            <label><input type="checkbox"> Mobile</label>
+                        </div>
+
+                        <!-- Price Filter -->
+                        <div class="filter-group">
+                            <label class="filter-title" style="margin-bottom: 1rem;">Harga</label>
+                            <div class="price-range">
+                                <input type="number" placeholder="Min" value="0">
+                                <span>-</span>
+                                <input type="number" placeholder="Max" value="10000000">
+                            </div>
+                        </div>
+
+                        <!-- Brand Filter -->
+                        <div class="filter-group">
+                            <label class="filter-title" style="margin-bottom: 1rem;">Brand</label>
+                            <label><input type="checkbox"> Beats</label>
+                            <label><input type="checkbox"> Sony</label>
+                            <label><input type="checkbox"> JBL</label>
+                            <label><input type="checkbox"> Apple</label>
+                            <label><input type="checkbox"> Samsung</label>
+                        </div>
+
+                        <!-- Rating Filter -->
+                        <div class="filter-group">
+                            <label class="filter-title" style="margin-bottom: 1rem;">Rating</label>
+                            <label><input type="checkbox"> <i class="fas fa-star" style="color: var(--primary-yellow);"></i><i class="fas fa-star" style="color: var(--primary-yellow);"></i><i class="fas fa-star" style="color: var(--primary-yellow);"></i><i class="fas fa-star" style="color: var(--primary-yellow);"></i><i class="fas fa-star" style="color: var(--primary-yellow);"></i> 5 Star</label>
+                            <label><input type="checkbox"> <i class="fas fa-star" style="color: var(--primary-yellow);"></i><i class="fas fa-star" style="color: var(--primary-yellow);"></i><i class="fas fa-star" style="color: var(--primary-yellow);"></i><i class="fas fa-star" style="color: var(--primary-yellow);"></i> 4 Star & Up</label>
+                            <label><input type="checkbox"> <i class="fas fa-star" style="color: var(--primary-yellow);"></i><i class="fas fa-star" style="color: var(--primary-yellow);"></i><i class="fas fa-star" style="color: var(--primary-yellow);"></i> 3 Star & Up</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="col-lg-9">
+                    <div class="row g-4 mb-4">
+                        <!-- Product 1 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    🎧
+                                    <span class="product-badge">Sale</span>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-name">Beats Studio Pro</div>
+                                    <div class="product-category">Premium Headphone</div>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="product-rating-text">(245)</span>
+                                    </div>
+                                    <div class="product-price">Rp 3.999.000</div>
+                                    <button class="btn-add-cart" onclick="window.location.href='detailproduk.html';"><i class="fas fa-shopping-cart"></i> Tambah ke Keranjang</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 2 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    🎵
+                                    <span class="product-badge">Best</span>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-name">Sony WH-1000XM5</div>
+                                    <div class="product-category">Noise Canceling</div>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="product-rating-text">(389)</span>
+                                    </div>
+                                    <div class="product-price">Rp 4.499.000</div>
+                                    <button class="btn-add-cart" onclick="window.location.href='detailproduk.html';"><i class="fas fa-shopping-cart"></i> Tambah ke Keranjang</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 3 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    🎮
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-name">Gaming Headset Pro</div>
+                                    <div class="product-category">Gaming Edition</div>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="product-rating-text">(156)</span>
+                                    </div>
+                                    <div class="product-price">Rp 2.299.000</div>
+                                    <button class="btn-add-cart" onclick="window.location.href='detailproduk.html';"><i class="fas fa-shopping-cart"></i> Tambah ke Keranjang</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 4 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    📻
+                                    <span class="product-badge">Sale</span>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-name">JBL Live Pro 2</div>
+                                    <div class="product-category">Wireless</div>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="product-rating-text">(198)</span>
+                                    </div>
+                                    <div class="product-price">Rp 2.799.000</div>
+                                    <button class="btn-add-cart" onclick="window.location.href='detailproduk.html';"><i class="fas fa-shopping-cart"></i> Tambah ke Keranjang</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 5 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    🎧
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-name">Apple AirPods Pro Max</div>
+                                    <div class="product-category">Premium Audio</div>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="product-rating-text">(512)</span>
+                                    </div>
+                                    <div class="product-price">Rp 5.299.000</div>
+                                    <button class="btn-add-cart" onclick="window.location.href='detailproduk.html';"><i class="fas fa-shopping-cart"></i> Tambah ke Keranjang</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 6 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    🎵
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-name">Sennheiser Momentum 4</div>
+                                    <div class="product-category">Professional</div>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="product-rating-text">(267)</span>
+                                    </div>
+                                    <div class="product-price">Rp 3.499.000</div>
+                                    <button class="btn-add-cart" onclick="window.location.href='detailproduk.html';"><i class="fas fa-shopping-cart"></i> Tambah ke Keranjang</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 7 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    🎧
+                                    <span class="product-badge">New</span>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-name">Bose QuietComfort 45</div>
+                                    <div class="product-category">Comfort Class</div>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="product-rating-text">(421)</span>
+                                    </div>
+                                    <div class="product-price">Rp 3.999.000</div>
+                                    <button class="btn-add-cart" onclick="window.location.href='detailproduk.html';"><i class="fas fa-shopping-cart"></i> Tambah ke Keranjang</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 8 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    📻
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-name">Marshall Major IV</div>
+                                    <div class="product-category">Iconic Style</div>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="product-rating-text">(334)</span>
+                                    </div>
+                                    <div class="product-price">Rp 2.999.000</div>
+                                    <button class="btn-add-cart" onclick="window.location.href='detailproduk.html';"><i class="fas fa-shopping-cart"></i> Tambah ke Keranjang</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 9 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    🎮
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-name">Razer Kraken X</div>
+                                    <div class="product-category">Gaming Pro</div>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="product-rating-text">(289)</span>
+                                    </div>
+                                    <div class="product-price">Rp 1.999.000</div>
+                                    <button class="btn-add-cart" onclick="window.location.href='detailproduk.html';"><i class="fas fa-shopping-cart"></i> Tambah ke Keranjang</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination-section">
+                        <span class="active">1</span>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">Next</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-md-3 footer-section">
+                    <h5>Toko Elektronik</h5>
+                    <p style="color: #999; font-size: 0.9rem;">Toko online terpercaya untuk kebutuhan audio dan elektronik Anda.</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="#" style="margin-right: 1rem; color: var(--primary-blue);"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="margin-right: 1rem; color: var(--primary-blue);"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="margin-right: 1rem; color: var(--primary-blue);"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: var(--primary-blue);"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5>Menu</h5>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="shop.html">Produk</a></li>
+                        <li><a href="index.html#news">Berita</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5>Bantuan</h5>
+                    <ul>
+                        <li><a href="#">Hubungi Kami</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5>Kontak</h5>
+                    <p style="color: #999; margin-bottom: 0.5rem;">
+                        <i class="fas fa-map-marker-alt"></i> Jl. Elektronik No. 123, Jakarta
+                    </p>
+                    <p style="color: #999; margin-bottom: 0.5rem;">
+                        <i class="fas fa-phone"></i> +62 812-3456-7890
+                    </p>
+                    <p style="color: #999;">
+                        <i class="fas fa-envelope"></i> info@tokoelektronik.com
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Toko Elektronik. Semua hak dilindungi. | Dibuat dengan <i class="fas fa-heart" style="color: var(--primary-red);"></i> oleh v0</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

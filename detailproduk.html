@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beats - Toko Elektronik</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #5B9FDB;
+            --primary-red: #E84C3D;
+            --primary-green: #2ECC71;
+            --primary-yellow: #F4D03F;
+            --dark: #1F1F1F;
+            --light: #F8F9FA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark) !important;
+        }
+
+        .nav-link {
+            color: var(--dark) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-blue) !important;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb-section {
+            background-color: #e9ecef;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb-section h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .breadcrumb-link {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .breadcrumb-link a {
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        /* Product Section */
+        .product-container {
+            background: white;
+            padding: 40px 0;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .product-image {
+            background: #f5f5f5;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .product-details h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 20px 0;
+            color: var(--dark);
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .stars {
+            color: #ff4444;
+        }
+
+        .review-count {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .product-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin: 20px 0;
+        }
+
+        .product-description {
+            color: #666;
+            line-height: 1.6;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+
+        .product-category {
+            color: #666;
+            margin: 20px 0;
+        }
+
+        .product-category a {
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 30px 0;
+        }
+
+        .quantity-input {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 8px 15px;
+            width: 60px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .btn-add-cart {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 10px 40px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-add-cart:hover {
+            background: #4a8ccc;
+        }
+
+        /* Tabs Section */
+        .tabs-section {
+            background: white;
+            padding: 40px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .nav-tabs {
+            border-bottom: 2px solid #f0f0f0;
+            margin-bottom: 30px;
+        }
+
+        .nav-tabs .nav-link {
+            color: #999 !important;
+            border: none;
+            padding-bottom: 15px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: var(--dark) !important;
+            border-bottom: 3px solid var(--primary-blue);
+            background: none;
+        }
+
+        .tab-content {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Related Products */
+        .related-products {
+            background: white;
+            padding: 40px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .related-products h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--dark);
+        }
+
+        .product-card {
+            background: #f5f5f5;
+            border-radius: 1rem;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            height: 100%;
+            border: none;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .sale-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--primary-blue);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin: 20px 0;
+        }
+
+        .product-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin: 15px 0;
+        }
+
+        .product-card .price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .product-card .category {
+            color: var(--primary-blue);
+            font-size: 0.85rem;
+            margin: 10px 0;
+        }
+
+        /* Brands Section */
+        .brands-section {
+            background: var(--light);
+            padding: 40px;
+            margin: 30px 0;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .brands-section .brand-logo {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-section h5 {
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            .product-details h1 {
+                font-size: 1.8rem;
+            }
+
+            .product-price {
+                font-size: 1.5rem;
+            }
+
+            .quantity-selector {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-shop"></i> Toko Elektronik
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+                </ul>
+                <button class="btn btn-outline-dark ms-3" style="border-radius: 25px; padding: 0.5rem 1.5rem;">
+                    <i class="fas fa-shopping-cart"></i> Keranjang
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-section">
+        <div class="container">
+            <div class="breadcrumb-link">
+                <a href="index.html">Home</a> > <span>Produk</span>
+            </div>
+            <h1>Beats</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Product Section -->
+        <div class="product-container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="product-image">
+                        <div style="font-size: 100px;">🎧</div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7">
+                    <div class="product-details">
+                        <h1>Beats</h1>
+                        
+                        <div class="product-rating">
+                            <span class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </span>
+                            <span class="review-count">(0 customer reviews)</span>
+                        </div>
+
+                        <div class="product-price">Rp 995.000</div>
+
+                        <p class="product-description">
+                            Headphone premium berkualitas tinggi dengan teknologi noise canceling terbaik. Desain ergonomis untuk kenyamanan maksimal saat digunakan berjam-jam. Baterai tahan lama hingga 40 jam dengan pengisian cepat.
+                        </p>
+
+                        <div class="product-category">
+                            Category: <a href="shop.html">Headphone</a>
+                        </div>
+
+                        <div class="quantity-selector">
+                            <input type="number" class="quantity-input" value="1" min="1">
+                            <button class="btn-add-cart" onclick="window.location.href='keranjang.html';">Add to cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs Section -->
+        <div class="tabs-section">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab">Description</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">Reviews (1)</button>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="description" role="tabpanel">
+                    <h3>Description</h3>
+                    <p style="margin-top: 20px;">
+                        Headphone premium dengan teknologi Audio terdepan untuk pengalaman mendengarkan yang luar biasa. Dilengkapi dengan active noise cancellation yang canggih untuk menyaring kebisingan sekitar, memberikan fokus penuh pada musik Anda. Desain over-ear yang ergonomis menjamin kenyamanan bahkan untuk penggunaan seharian. Dilengkapi dengan microphone built-in untuk kemudahan melakukan panggilan telepon. Baterai lithium-ion berkualitas tinggi dapat bertahan hingga 40 jam sekali charge lengkap.
+                    </p>
+                </div>
+                <div class="tab-pane fade" id="reviews" role="tabpanel">
+                    <h3>Customer Reviews</h3>
+                    <p style="margin-top: 20px;">Belum ada review. Jadilah yang pertama memberikan review untuk produk ini!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Products -->
+        <div class="related-products">
+            <h2>Related products</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="product-card">
+                        <div class="sale-badge">Sale</div>
+                        <div style="font-size: 60px; text-align: center;">🎧</div>
+                        <span class="category">Beats</span>
+                        <h3>Beats Studio Pro</h3>
+                        <div class="price">Rp 3.999.000</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="product-card">
+                        <div style="font-size: 60px; text-align: center;">🎵</div>
+                        <span class="category">Sony</span>
+                        <h3>Sony WH-1000XM5</h3>
+                        <div class="price">Rp 4.499.000</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="product-card">
+                        <div style="font-size: 60px; text-align: center;">🎮</div>
+                        <span class="category">Gaming</span>
+                        <h3>Gaming Headset Pro</h3>
+                        <div class="price">Rp 2.299.000</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="product-card">
+                        <div style="font-size: 60px; text-align: center;">📻</div>
+                        <span class="category">JBL</span>
+                        <h3>JBL Live Pro 2</h3>
+                        <div class="price">Rp 2.799.000</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Brands Section -->
+        <div class="brands-section">
+            <div class="row g-4">
+                <div class="col-md-4 col-lg-2">
+                    <div class="brand-logo">GOLDEN</div>
+                </div>
+                <div class="col-md-4 col-lg-2">
+                    <div class="brand-logo">SWEETY</div>
+                </div>
+                <div class="col-md-4 col-lg-2">
+                    <div class="brand-logo">FASTLANE</div>
+                </div>
+                <div class="col-md-4 col-lg-2">
+                    <div class="brand-logo">MIGHTY</div>
+                </div>
+                <div class="col-md-4 col-lg-2">
+                    <div class="brand-logo">JR</div>
+                </div>
+                <div class="col-md-4 col-lg-2">
+                    <div class="brand-logo">BRAND</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-md-3 footer-section">
+                    <h5>Toko Elektronik</h5>
+                    <p style="color: #999; font-size: 0.9rem;">Toko online terpercaya untuk kebutuhan audio dan elektronik Anda.</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="#" style="margin-right: 1rem; color: var(--primary-blue);"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="margin-right: 1rem; color: var(--primary-blue);"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="margin-right: 1rem; color: var(--primary-blue);"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: var(--primary-blue);"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5>Menu</h5>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="shop.html">Produk</a></li>
+                        <li><a href="#">Berita</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5>Bantuan</h5>
+                    <ul>
+                        <li><a href="#">Hubungi Kami</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5>Kontak</h5>
+                    <p style="color: #999; margin-bottom: 0.5rem;">
+                        <i class="fas fa-map-marker-alt"></i> Jl. Elektronik No. 123, Jakarta
+                    </p>
+                    <p style="color: #999; margin-bottom: 0.5rem;">
+                        <i class="fas fa-phone"></i> +62 812-3456-7890
+                    </p>
+                    <p style="color: #999;">
+                        <i class="fas fa-envelope"></i> info@tokoelektronik.com
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Toko Elektronik. Semua hak dilindungi. | Dibuat dengan <i class="fas fa-heart" style="color: var(--primary-red);"></i> oleh v0</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
